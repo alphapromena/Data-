@@ -3,7 +3,7 @@
  * The engine reads from the target data source, profiles it, and returns
  * structured JSON that the API then persists to scan_results + dmi_scores.
  */
-import { spawn } from 'child_process';
+import { spawn, type SpawnOptions } from 'child_process';
 import { Router } from 'express';
 import { z } from 'zod';
 import { env } from '../config/env.js';
@@ -38,17 +38,21 @@ engineRouter.post(
       args.push('--tables', ...tables);
     }
 
-    const [cmd, ...baseArgs] = env.SCAN_ENGINE_CMD.split(' ');
-    const child = spawn(cmd, [...baseArgs, ...args], {
+    const parts = env.SCAN_ENGINE_CMD.split(' ');
+    const cmd = parts[0] as string;
+    const baseArgs = parts.slice(1);
+    const spawnOpts: SpawnOptions = {
       env: { ...process.env, PYTHONUNBUFFERED: '1' },
-    });
+      stdio: ['ignore', 'pipe', 'pipe'],
+    };
+    const child = spawn(cmd, [...baseArgs, ...args], spawnOpts);
 
     let stdout = '';
     let stderr = '';
-    child.stdout.on('data', (d: Buffer) => { stdout += d.toString(); });
-    child.stderr.on('data', (d: Buffer) => { stderr += d.toString(); });
+    (child.stdout as NodeJS.ReadableStream).on('data', (d: Buffer) => { stdout += d.toString(); });
+    (child.stderr as NodeJS.ReadableStream).on('data', (d: Buffer) => { stderr += d.toString(); });
 
-    child.on('close', async (code) => {
+    child.on('close', async (code: number | null) => {
       if (code !== 0) {
         await scansService.update(scan_id, {
           status: 'failed',
