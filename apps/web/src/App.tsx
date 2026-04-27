@@ -1,30 +1,33 @@
-import { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Suspense } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout';
-import { applyDirection } from './lib/i18n';
-import { DashboardPage } from './pages/Dashboard';
-import { PlaceholderPage } from './pages/Placeholder';
+import { AlertsPage } from './pages/Alerts';
+import { ClientsPage } from './pages/Clients';
+import { Dashboard } from './pages/Dashboard';
+import { ReportsPage } from './pages/Reports';
+import { ScansPage } from './pages/Scans';
+
+function LoadingSpinner() {
+  return (
+    <div className="flex items-center justify-center h-full min-h-[200px]">
+      <div className="w-8 h-8 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
+}
 
 export default function App() {
-  const { i18n } = useTranslation();
-
-  useEffect(() => {
-    applyDirection(i18n.language);
-  }, [i18n.language]);
-
   return (
-    <Router>
-      <Layout>
+    <Layout>
+      <Suspense fallback={<LoadingSpinner />}>
         <Routes>
-          <Route path="/"         element={<DashboardPage />} />
-          <Route path="/clients"  element={<PlaceholderPage titleKey="nav.clients"  />} />
-          <Route path="/scans"    element={<PlaceholderPage titleKey="nav.scans"    />} />
-          <Route path="/reports"  element={<PlaceholderPage titleKey="nav.reports"  />} />
-          <Route path="/alerts"   element={<PlaceholderPage titleKey="nav.alerts"   />} />
-          <Route path="/settings" element={<PlaceholderPage titleKey="nav.settings" />} />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/clients" element={<ClientsPage />} />
+          <Route path="/scans" element={<ScansPage />} />
+          <Route path="/reports" element={<ReportsPage />} />
+          <Route path="/alerts" element={<AlertsPage />} />
+          <Route path="*" element={<Dashboard />} />
         </Routes>
-      </Layout>
-    </Router>
+      </Suspense>
+    </Layout>
   );
 }

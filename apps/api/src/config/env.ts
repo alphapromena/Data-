@@ -6,8 +6,13 @@ const schema = z.object({
   PORT: z.coerce.number().int().positive().default(4000),
   LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace']).default('info'),
   CORS_ORIGIN: z.string().default('*'),
-  SUPABASE_URL: z.string().url(),
-  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
+  // Railway PostgreSQL — provided automatically as DATABASE_URL on Railway
+  DATABASE_URL: z.string().url(),
+
+  // JWT secret for auth middleware
+  JWT_SECRET: z.string().min(32).default('change-me-in-production-must-be-32-chars!!'),
+
+  // Python scan engine integration (path to script or worker URL)
   SCAN_ENGINE_CMD: z.string().default('python -m mizan_scan'),
 });
 

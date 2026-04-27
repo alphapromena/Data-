@@ -1,40 +1,36 @@
+/**
+ * i18next configuration for Mizan — bilingual Arabic/English support.
+ * Detects browser language and falls back to English.
+ * RTL/LTR is applied to <html> via LanguageToggle component.
+ */
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
-import ar from '../locales/ar/common.json';
-import en from '../locales/en/common.json';
 
-export const SUPPORTED_LANGS = ['en', 'ar'] as const;
-export type SupportedLang = (typeof SUPPORTED_LANGS)[number];
+import arCommon from '../locales/ar/common.json';
+import enCommon from '../locales/en/common.json';
 
-export const RTL_LANGS: ReadonlySet<SupportedLang> = new Set(['ar']);
-
-void i18n
+i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     resources: {
-      en: { common: en },
-      ar: { common: ar },
+      en: { common: enCommon },
+      ar: { common: arCommon },
     },
-    fallbackLng: 'en',
-    supportedLngs: SUPPORTED_LANGS as unknown as string[],
     defaultNS: 'common',
+    fallbackLng: 'en',
+    supportedLngs: ['en', 'ar'],
     interpolation: { escapeValue: false },
     detection: {
       order: ['localStorage', 'navigator'],
       caches: ['localStorage'],
-      lookupLocalStorage: 'mizan.lang',
     },
   });
 
-export function applyDirection(lang: string): void {
-  const isRtl = RTL_LANGS.has(lang as SupportedLang);
-  const root = document.documentElement;
-  root.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
-  root.setAttribute('lang', lang);
-}
-
-i18n.on('languageChanged', applyDirection);
+// Apply RTL direction on initial load
+const lang = i18n.language?.startsWith('ar') ? 'ar' : 'en';
+document.documentElement.lang = lang;
+document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
 
 export default i18n;
