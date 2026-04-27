@@ -1,0 +1,33 @@
+{
+  "app": {
+    "name": "Mizan",
+    "tagline": "Data Intelligence & Governance"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "scans": "Scans",
+    "reports": "Reports",
+    "alerts": "Alerts",
+    "settings": "Settings"
+  },
+  "stage": {
+    "scan": "Scan",
+    "monitor": "Monitor",
+    "govern": "Govern"
+  },
+  "language": {
+    "toggle": "العربية"
+  },
+  "dashboard": {
+    "title": "Overview",
+    "dmi": "Data Maturity Index",
+    "active_scans": "Active scans",
+    "open_alerts": "Open alerts",
+    "clients": "Active clients"
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "Something went wrong"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "app": {
+    "name": "ميزان",
+    "tagline": "ذكاء وحوكمة البيانات"
+  },
+  "nav": {
+    "dashboard": "لوحة التحكم",
+    "clients": "العملاء",
+    "scans": "الفحوصات",
+    "reports": "التقارير",
+    "alerts": "التنبيهات",
+    "settings": "الإعدادات"
+  },
+  "stage": {
+    "scan": "فحص",
+    "monitor": "مراقبة",
+    "govern": "حوكمة"
+  },
+  "language": {
+    "toggle": "English"
+  },
+  "dashboard": {
+    "title": "نظرة عامة",
+    "dmi": "مؤشر نضج البيانات",
+    "active_scans": "الفحوصات النشطة",
+    "open_alerts": "التنبيهات المفتوحة",
+    "clients": "العملاء النشطون"
+  },
+  "common": {
+    "loading": "جارٍ التحميل…",
+    "error": "حدث خطأ ما"
+  }
+}

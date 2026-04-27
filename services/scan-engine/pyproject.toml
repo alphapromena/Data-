@@ -1,0 +1,20 @@
+[project]
+name = "mizan-scan"
+version = "0.1.0"
+description = "Mizan Scan Engine — data quality profiling using Great Expectations + pandas."
+requires-python = ">=3.11"
+authors = [{ name = "AlphaPro Consulting" }]
+readme = "README.md"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[project.scripts]
+mizan-scan = "mizan_scan.main:app"

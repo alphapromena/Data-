@@ -1,0 +1,20 @@
+{
+  "name": "mizan",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Mizan — Data Intelligence & Governance Platform by AlphaPro Consulting",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "npm --workspace @mizan/api run dev",
+    "dev:web": "npm --workspace @mizan/web run dev",
+    "build": "npm --workspaces --if-present run build",
+    "typecheck": "npm --workspaces --if-present run typecheck",
+    "lint": "npm --workspaces --if-present run lint"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
