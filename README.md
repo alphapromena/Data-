@@ -50,10 +50,13 @@ cp apps/api/.env.example apps/api/.env
 cp apps/web/.env.example apps/web/.env
 cp services/scan-engine/.env.example services/scan-engine/.env
 
-# 3. Apply Supabase migrations
-#    Either via Supabase CLI:
-#      supabase db push
-#    Or paste supabase/migrations/0001_initial_schema.sql into the SQL editor.
+# 3. Apply Supabase migrations to the remote project
+#    a) Authenticate (one-time, interactive):
+#         npx supabase login
+#    b) Link + push migrations:
+#         ./scripts/supabase-push.sh
+#    Or, as a fallback: paste supabase/migrations/0001_initial_schema.sql
+#    into the Supabase Dashboard SQL editor and run it.
 
 # 4. Set up the Python scan engine
 cd services/scan-engine
