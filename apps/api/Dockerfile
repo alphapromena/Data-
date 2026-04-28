@@ -1,19 +1,23 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
+
+# Copy package files and install dependencies
 COPY package*.json ./
-COPY apps/api/package*.json ./apps/api/
-COPY packages/shared-types/package*.json ./packages/shared-types/
-RUN npm install --workspace=apps/api --workspace=packages/shared-types
-COPY packages/shared-types ./packages/shared-types
-COPY apps/api ./apps/api
-RUN npm run build --workspace=packages/shared-types
-RUN npm run build --workspace=apps/api
+RUN npm install
+
+# Copy all source files
+COPY . .
+
+# Build TypeScript
+RUN npm run build
 
 FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
-COPY --from=builder /app/apps/api/dist ./dist
-COPY --from=builder /app/apps/api/package*.json ./
+
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/node_modules ./node_modules
+
 EXPOSE 4000
-CMD ["node", "dist/server.js"]
+CMD ["node", "dist/index.js"]
