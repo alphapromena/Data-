@@ -3,7 +3,7 @@
  * All requests go through /api/v1 on the VITE_API_URL base.
  */
 
-const BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:4000';
+const BASE = import.meta.env.VITE_API_URL ?? 'https://3001-i43152d26u67ymnp67m3f-2a08f4a3.sg1.manus.computer';
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${BASE}/api/v1${path}`, {

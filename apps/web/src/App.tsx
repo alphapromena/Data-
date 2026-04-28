@@ -6,6 +6,7 @@ import { ClientsPage } from './pages/Clients';
 import { Dashboard } from './pages/Dashboard';
 import { ReportsPage } from './pages/Reports';
 import { ScansPage } from './pages/Scans';
+import ScanDemo from './pages/ScanDemo';
 
 function LoadingSpinner() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/clients" element={<ClientsPage />} />
           <Route path="/scans" element={<ScansPage />} />
+          <Route path="/demo" element={<ScanDemo />} />
           <Route path="/reports" element={<ReportsPage />} />
           <Route path="/alerts" element={<AlertsPage />} />
           <Route path="*" element={<Dashboard />} />

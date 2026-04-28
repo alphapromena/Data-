@@ -7,6 +7,7 @@ const NAV_ITEMS = [
   { key: 'scans',      path: '/scans',    icon: '🔍' },
   { key: 'reports',    path: '/reports',  icon: '📄' },
   { key: 'alerts',     path: '/alerts',   icon: '🔔' },
+  { key: 'demo',        path: '/demo',     icon: '▶' },
 ] as const;
 
 export function Sidebar() {

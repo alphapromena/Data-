@@ -9,7 +9,8 @@
     "scans": "Scans",
     "reports": "Reports",
     "alerts": "Alerts",
-    "settings": "Settings"
+    "settings": "Settings",
+    "demo": "Demo Scan"
   },
   "stage": {
     "scan": "Scan",
