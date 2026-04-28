@@ -1,9 +1,9 @@
+/* Arabic + Latin fonts — must come before @tailwind */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Cairo:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Arabic font import */
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Cairo:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
   --bg: #0b1020;
